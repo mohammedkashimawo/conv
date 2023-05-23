@@ -1,0 +1,190 @@
+<!doctype html>
+<head>
+    <style type="text/css">
+
+        body{background-color: #16161640;display: flex;flex-wrap:wrap;; text-align: center;justify-content: center;}
+        .main{width:50%;height:40vh; background-color: white;bprder:1px black solid;position:absolute;top:25%;border-radius:50px;box-shadow:3px 5px 15px rgba(0,0,0,0.4);}
+#div1 p{width:100%;height:20px;border:0px black solid;text-align:center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+#div1  .inp1{width:50%;height:30px;margin-left:10%;text-align: center;}
+#div1 .inp2{width:20%;height:30px;margin-left:5%;text-align:center;}
+
+
+#div2 p{width:100%;height:20px;border:0px black solid;text-align:center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+#div2  .inp3{width:50%;height:30px;margin-left:10%;text-align: center;}
+#div2 .inp4{width:20%;height:30px;margin-left:5%;text-align:center;}
+
+
+.floater{width:400px;height:30px;color:white;background-color: red;
+    position:absolute;top:-600px;visibility:hidden;}
+
+.lolo{width:400px;height:30px;color:white;background-color: red;
+    animation:lo 2s ease;
+    position:absolute;top:-100px;left:40%;
+}
+ @keyframes lo{
+    
+10%{top:-50px;}
+40%{top:10%;left:40%;}
+45%{top:10%;left:50%}
+50%{top:10%;left:30%}
+60%{top:10%;left:40%;}
+90%{left:40%;top:-60%;}
+}
+    </style>
+</head>
+<body >
+    <div id="floater" class="floater">your input should ne a positive number </div>
+    <div id="main" class="main"><div id="div1"><p>converter from base 10 to any base</p>
+    <input type="text" id="inp" class="inp1" placeholder="number to convert"
+     onkeyup="goslow()"
+      onkeydown="nama()">
+    <input type="text" id="inp2" class="inp2" onkeyup="goslow()" placeholder="base to" 
+    onkeydown="nama()" >
+    <p id="isni"></p>
+    </div>
+
+
+    <div id="div2">
+
+
+
+
+        <p>converter from any other base to base 10</p>
+
+
+        <input type="text" id="inp3" class="inp3" placeholder="number to convert from" 
+        onkeyup="convertToBase10()" >
+        <input type="text" id="inp4" class="inp4"
+         onkeyup="convertToBase10()" 
+        placeholder="base from">
+        <p id="isni2"></p>
+    </div>
+    
+    </div>
+    
+    <script type="text/javascript">
+function goslow(){
+        var x=document.getElementById('inp').value
+        var y=document.getElementById('inp2').value
+        let isni=document.getElementById('isni');
+        var yar =document.getElementsByClassName("floater");
+       //let lp=(+x);
+       //let lr=(+y);
+
+      // alert( typeof lp);
+     //  alert(lr);
+
+     //alert(lp/2)
+     //nsole.log((lp/2))
+    /* if(isNaN(x)){
+        console.log('coding aint easy');
+        console.log(isNaN('uu'))
+     }
+*/
+
+
+    if( isNaN(x)== true || isNaN(y) == true )
+    {
+
+
+  
+        document.getElementById("floater").classList = "lolo"; 
+        alert("bad")
+      //  document.getElementById("floater").className="floater";
+    }
+    else if(isNaN(x) ==  false || isNaN(y) ==false)
+     
+     {
+        document.getElementById("floater").className ='floater';
+        var d = parseInt(x);
+        var de=parseInt(y);
+        alert(x)
+      let ono =d.toString(de);
+
+isni.innerHTML=`your input in base ${y} is ${ono}<sub>${y}</sub>`}
+
+}
+    function goslow3(){
+        var xx=document.getElementById('inp3').value
+        var yy=document.getElementById('inp4').value
+        let isnis=document.getElementById('isnis');
+
+let sum=0;
+
+var obo=Array.from(xx)
+      //  alert(Array.from(xx))
+       // alert(obo.length)
+      //  alert(obo[obo.length-1]) 
+        sum =0;
+        for(i=0; i < obo.length; i++){
+//let ada = ;
+//console.log(ada)
+sum +=obo[i] * (parseInt(yy) **i)
+
+isnis.innerHTML=`your input in base 10 is ${sum}<sub>10</sub>`
+         // sum + = obo[i] * ada [i];
+        //    alert(sum)
+  //      console.log(ada)
+
+ let ram = obo.sort(funct);
+  function funct(a,b){
+
+    return b-a;
+  }
+  console.log(ram)
+
+  console.log(ram[0])
+if(ram[0]  >= parseInt(yy)){
+    alert(`the to convert is not in base ${yy}`)
+}  
+        }
+    
+    }
+
+    function nama(){
+
+        document.getElementById("floater").className  = "floater"
+    
+    }
+
+
+
+
+
+
+    function convertToBase10() {
+  // Get the values from the input fields
+  const number = document.getElementById('inp3').value;
+  const base = parseInt(document.getElementById('inp4').value);
+
+  // Convert the number to base 10 using the previous code
+  const base10Number = convertToBase10Helper(number, base);
+
+  // Set the result as the innerHTML of the <p> tag with id "output"
+  document.getElementById('isni2').innerHTML = `Base 10: ${base10Number}`;
+}
+
+function convertToBase10Helper(number, base) {
+  // Convert the number to a string and split it into an array of digits
+  const digits = number.toString().split('');
+
+  // Initialize the result to zero
+  let result = 0;
+
+  // Iterate through each digit, starting from the leftmost (most significant) digit
+  for (let i = 0; i < digits.length; i++) {
+    // Convert the digit to a numeric value
+    const digitValue = parseInt(digits[i], base);
+
+    // Multiply the digit value by the appropriate power of the base and add it to the result
+    result += digitValue * Math.pow(base, digits.length - 1 - i);
+  }
+
+  // Return the final result
+  return result;
+}
+
+    </script>
+</body></html>
